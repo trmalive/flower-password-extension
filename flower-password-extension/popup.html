@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 320px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+        .header {
+            background: linear-gradient(135deg, #f9a8d4 0%, #a78bfa 100%);
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .content {
+            padding: 15px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: #4b5563;
+            margin-bottom: 4px;
+        }
+        input[type="text"], input[type="password"], select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+            outline: none;
+        }
+        input:focus {
+            border-color: #a78bfa;
+            box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.2);
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #8b5cf6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-bottom: 8px;
+        }
+        .btn:hover {
+            background-color: #7c3aed;
+        }
+        .btn-secondary {
+            background-color: #ffffff;
+            color: #4b5563;
+            border: 1px solid #d1d5db;
+        }
+        .btn-secondary:hover {
+            background-color: #f9fafb;
+        }
+        .footer {
+            padding: 10px;
+            text-align: center;
+            font-size: 10px;
+            color: #9ca3af;
+            border-top: 1px solid #e5e7eb;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .checkbox-group input {
+            width: auto;
+            margin-right: 8px;
+        }
+        .checkbox-group label {
+            margin: 0;
+            font-weight: normal;
+        }
+        #result-container {
+            margin-top: 10px;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 8px;
+            font-family: monospace;
+            text-align: center;
+            word-break: break-all;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>花密 Flower Password</h1>
+    </div>
+    <div class="content">
+        <div class="form-group">
+            <label for="password">记忆密码</label>
+            <input type="password" id="password" placeholder="输入记忆密码">
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="remember">
+            <label for="remember">记住记忆密码 (本地存储)</label>
+        </div>
+        <div class="form-group">
+            <label for="key">区分代号 (自动识别)</label>
+            <input type="text" id="key" placeholder="例如: google">
+        </div>
+        
+        <div class="form-group">
+            <label>选项</label>
+            <div style="display: flex; gap: 8px;">
+                <select id="length">
+                    <option value="16">16位</option>
+                    <option value="10">10位</option>
+                    <option value="20">20位</option>
+                    <option value="32">32位</option>
+                </select>
+                <select id="mode">
+                    <option value="flower">默认模式</option>
+                    <option value="base64">Base64</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="result-container"></div>
+
+        <button id="fill-btn" class="btn">一键填充 (Fill)</button>
+        <button id="copy-btn" class="btn btn-secondary">复制 (Copy)</button>
+    </div>
+    <div class="footer">
+        基于 HMAC-MD5 算法 | 安全离线
+    </div>
+
+    <!-- 引用本地库 -->
+    <script src="lib/hmac-md5.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>
