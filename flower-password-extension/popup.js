@@ -68,16 +68,56 @@ document.addEventListener('DOMContentLoaded', async () => {
             args: [password]
         });
         
-        // Close popup
-        window.close();
+        // Countdown 5s then clear clipboard and close
+        let timeLeft = 5;
+        if (fillBtn.dataset.interval) clearInterval(parseInt(fillBtn.dataset.interval));
+        
+        const updateText = () => {
+            fillBtn.textContent = `已填充 (${timeLeft}s)`;
+        };
+        updateText();
+        
+        const interval = setInterval(() => {
+            timeLeft--;
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                navigator.clipboard.writeText('');
+                window.close();
+            } else {
+                updateText();
+            }
+        }, 1000);
+        
+        fillBtn.dataset.interval = interval;
     });
 
     copyBtn.addEventListener('click', () => {
         const password = resultContainer.textContent;
         if (!password) return;
         navigator.clipboard.writeText(password).then(() => {
-            copyBtn.textContent = "已复制!";
-            setTimeout(() => copyBtn.textContent = "复制 (Copy)", 1500);
+            // Countdown 5s then clear clipboard
+            let timeLeft = 5;
+            const originalText = "复制 (Copy)";
+            
+            if (copyBtn.dataset.interval) clearInterval(parseInt(copyBtn.dataset.interval));
+            
+            const updateText = () => {
+                copyBtn.textContent = `已复制! (${timeLeft}s)`;
+            };
+            updateText();
+            
+            const interval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    navigator.clipboard.writeText('');
+                    copyBtn.textContent = originalText;
+                } else {
+                    updateText();
+                }
+            }, 1000);
+            
+            copyBtn.dataset.interval = interval;
         });
     });
 
