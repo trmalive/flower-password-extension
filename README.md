@@ -14,10 +14,15 @@
 <img width="320" height="454" alt="ScreenShot_2026-01-04_133121_488" src="https://github.com/user-attachments/assets/c74c00e5-7cbc-4a69-8f4a-9e5490398ba7" />
 
 嫌麻烦未提交至浏览器插件商店
+
 安装说明：
 将flower-password-extension文件夹下载至电脑
+
 打开浏览器管理扩展页
+
 点开开发者选项
+
 点击“加载解压缩的扩展”-选择flower-password-extension文件夹，点确定即可加载成功
+
 
 在任意需要输入密码的页面，插件会根据该网站自动识别《区分代号》输入《记忆密码》后点一键填充即可输入生成后的密码。
